@@ -161,6 +161,12 @@ export interface DateTimePickerProps {
   pickerContainerStyleIOS?: ViewStyle;
 
   /**
+   * The style applied to the actual picker component - this can be
+   * either a native iOS picker or a custom one if `customPickerIOS` was provided
+   */
+  pickerComponentStyleIOS?: ViewStyle;
+
+  /**
    * Initial selected date/time
    *
    * Default is a date object from `new Date()`
@@ -263,9 +269,8 @@ export interface DateTimePickerProps {
 
   /**
    * Handler called when the user presses the cancel button
-   * Passes the current selected date
    */
-  onCancel(date: Date): void;
+  onCancel(): void;
 
   /**
    * Called when the underlying modal finishes its' closing animation
@@ -285,8 +290,8 @@ export interface DateTimePickerProps {
 }
 
 type NativePickerProps =
-  | Omit<IOSNativeProps, "value" | "mode">
-  | Omit<AndroidNativeProps, "value" | "mode">;
+  | Omit<IOSNativeProps, "value" | "mode" | "onChange">
+  | Omit<AndroidNativeProps, "value" | "mode" | "onChange">;
 
 export type ReactNativeModalDateTimePickerProps = DateTimePickerProps &
   NativePickerProps;
